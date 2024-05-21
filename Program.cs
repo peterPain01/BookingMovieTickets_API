@@ -6,7 +6,12 @@ var connString = builder.Configuration.GetConnectionString("BookingMovieTicketsA
 builder.Services.AddSqlServer<BookingMovieTicketsContext>(connString);
 
 var app = builder.Build();
+
+// Mapping
 app.MapMoviesEndPoints();
+app.MapGenresEndPoints();
+
+
 await app.MigrateDbAsync();
 
 app.Run();
