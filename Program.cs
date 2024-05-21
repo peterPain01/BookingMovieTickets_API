@@ -1,9 +1,11 @@
 using Microsoft.OpenApi.Models;
 using MovieTickets.Api.EndPoints;
 using MovieTickets.Api.EntityModels;
+using MovieTickets.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 var connString = builder.Configuration.GetConnectionString("BookingMovieTicketsApp");
+builder.Services.AddTransient<GlobalExceptionHandler>();
 builder.Services.AddSqlServer<BookingMovieTicketsContext>(connString);
 
 builder.Services.AddCors(options =>
@@ -48,10 +50,12 @@ if (app.Environment.IsDevelopment())
 }
 
 // Mapping
+app.UseHttpsRedirection();
+app.UseMiddleware<GlobalExceptionHandler>();
+
 app.MapMoviesEndPoints();
 app.MapGenresEndPoints();
 
 await app.MigrateDbAsync();
-
 
 app.Run();
