@@ -1,3 +1,4 @@
+using Microsoft.OpenApi.Models;
 using MovieTickets.Api.EndPoints;
 using MovieTickets.Api.EntityModels;
 
@@ -18,13 +19,39 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc(
+        "v1",
+        new OpenApiInfo
+        {
+            Version = "v1",
+            Title = "Booking Movie Tickets - API",
+            Description = "A simple example ASP.NET Core Web API",
+        }
+    );
+});
+
 var app = builder.Build();
-app.UseCors(); // this line is added
+app.UseCors();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Booking Movie Tickets - API V1");
+        c.RoutePrefix = string.Empty;
+    });
+}
 
 // Mapping
 app.MapMoviesEndPoints();
 app.MapGenresEndPoints();
 
 await app.MigrateDbAsync();
+
 
 app.Run();
