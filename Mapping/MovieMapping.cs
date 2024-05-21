@@ -26,7 +26,7 @@ public static class MovieMapping
         return new(
             movie.MovieId,
             movie.Title,
-            movie.Genre?.Name,
+            movie.Genre!.Name,
             movie.DurationMinutes,
             movie?.ReleaseDate,
             movie?.Rating,

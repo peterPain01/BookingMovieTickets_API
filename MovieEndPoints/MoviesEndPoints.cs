@@ -123,29 +123,20 @@ public static class MoviesEndPoints
             "/",
             async (CreateMovieDto newMovie, BookingMovieTicketsContext dbContext) =>
             {
-                try
-                {
-                    Movie movie = newMovie.ToEntity();
-                    await dbContext.Movies.AddAsync(movie);
-                    await dbContext.SaveChangesAsync();
+                Movie movie = newMovie.ToEntity();
+                await dbContext.Movies.AddAsync(movie);
+                await dbContext.SaveChangesAsync();
 
-                    // new way to get create movie
-                    var createdMovie = await dbContext
-                        .Movies.Include(m => m.Genre)
-                        .FirstOrDefaultAsync(m => m.MovieId == movie.MovieId);
+                // new way to get create movie
+                var createdMovie = await dbContext
+                    .Movies.Include(mv => mv.Genre)
+                    .FirstOrDefaultAsync(m => m.MovieId == movie.MovieId);
 
-                    return Results.CreatedAtRoute(
-                        GetMovieEndPointName,
-                        new { id = createdMovie?.MovieId },
-                        createdMovie?.ToMovieDto()
-                    );
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.StackTrace);
-                    Console.WriteLine(ex.Message);
-                    return Results.StatusCode(500);
-                }
+                return Results.CreatedAtRoute(
+                    GetMovieEndPointName,
+                    new { id = createdMovie?.MovieId },
+                    createdMovie?.ToMovieDto()
+                );
             }
         );
 
@@ -201,7 +192,7 @@ public static class MoviesEndPoints
             }
         );
 
-        // use it later 
+        // use it later
         // public async Task<(ObservableCollection<Movie> Movies, int TotalRecords)> GetMoviesByNameAsync(string title, int page = 1, string filter = "", string sort = "", string sortType = "")
         // {
         //     const int PAGE_SIZE = 3;
