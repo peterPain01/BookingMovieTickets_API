@@ -27,10 +27,6 @@ public partial class Movie
 
     public string? TrailerUrl { get; set; }
 
-    public int? DirectorId { get; set; }
-
-    public virtual Director? Director { get; set; }
-
     public virtual Genre? Genre { get; set; }
 
     public virtual ICollection<Showtime> Showtimes { get; set; } = new List<Showtime>();
