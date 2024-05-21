@@ -118,7 +118,7 @@ public static class MoviesEndPoints
             }
         );
 
-        // POST /movie
+        // POST /movies
         group.MapPost(
             "/",
             async (CreateMovieDto newMovie, BookingMovieTicketsContext dbContext) =>
@@ -149,35 +149,59 @@ public static class MoviesEndPoints
             }
         );
 
-        // PATCH /movie
-        // group.MapPatch(
-        //     "/",
-        //     async (CreateGameDto newMovie, BookingMovieTicketsContext dbContext) => {
+        // PUT /movies
+        group.MapPut(
+            "/${id}",
+            async (int id, CreateMovieDto updateMovie, BookingMovieTicketsContext dbContext) =>
+            {
+                var movie = await dbContext.Movies.FindAsync(id);
+                if (movie is null)
+                    return Results.NotFound($"Movie with ID {id} not found.");
 
+                dbContext.Entry(movie).CurrentValues.SetValues(updateMovie.ToEntity());
+                await dbContext.SaveChangesAsync();
 
-        //      }
-        // );
+                return Results.Ok(movie);
+            }
+        );
 
+        group.MapGet(
+            "/${filter}",
+            async (string filter, BookingMovieTicketsContext dbContext) =>
+            {
+                DateTime startDate;
+                DateTime endDate;
 
-        // public async Task UpdateMovieAsync(Movie updatedMovie)
-        // {
-        //     var movie = await _context.Movies.FirstOrDefaultAsync(mv => mv.MovieId == updatedMovie.MovieId);
-        //     if (movie != null)
-        //     {
-        //         movie.Title = updatedMovie.Title;
-        //         movie.DurationMinutes = updatedMovie.DurationMinutes;
-        //         movie.ReleaseDate = updatedMovie.ReleaseDate;
-        //         movie.Rating = updatedMovie.Rating;
-        //         movie.Certification = updatedMovie.Certification;
-        //         movie.PlotSummary = updatedMovie.PlotSummary;
-        //         movie.PosterUrl = updatedMovie.PosterUrl;
-        //         movie.PosterVerticalUrl = updatedMovie.PosterVerticalUrl;
+                switch (filter.ToLower())
+                {
+                    case "today":
+                        startDate = DateTime.Today;
+                        endDate = startDate.AddDays(1);
+                        break;
+                    case "month":
+                        startDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                        endDate = startDate.AddMonths(1);
+                        break;
+                    case "week":
+                        startDate = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek);
+                        endDate = startDate.AddDays(7);
+                        break;
+                    default:
+                        return Results.BadRequest(
+                            "Invalid filter value. Supported values are 'today', 'month', and 'week'."
+                        );
+                }
 
-        //         await _context.SaveChangesAsync();
-        //     }
-        // }
+                var totals = await dbContext
+                    .Showtimes.Where(st =>
+                        st.ShowtimeDatetime >= startDate && st.ShowtimeDatetime < endDate
+                    )
+                    .CountAsync();
+                return Results.Ok(totals);
+            }
+        );
 
-
+        // use it later 
         // public async Task<(ObservableCollection<Movie> Movies, int TotalRecords)> GetMoviesByNameAsync(string title, int page = 1, string filter = "", string sort = "", string sortType = "")
         // {
         //     const int PAGE_SIZE = 3;
@@ -208,37 +232,6 @@ public static class MoviesEndPoints
 
         //     return (new ObservableCollection<Movie>(movies), totalRecords);
         // }
-
-
-        // public async Task<int> GetTotalShowTimeAsync(string filter)
-        // {
-        //     DateTime startDate;
-        //     DateTime endDate;
-
-        //     switch (filter.ToLower())
-        //     {
-        //         case "today":
-        //             startDate = DateTime.Today;
-        //             endDate = startDate.AddDays(1);
-        //             break;
-        //         case "month":
-        //             startDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-        //             endDate = startDate.AddMonths(1);
-        //             break;
-        //         case "week":
-        //             startDate = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek);
-        //             endDate = startDate.AddDays(7);
-        //             break;
-        //         default:
-        //             throw new ArgumentException("Invalid filter value. Supported values are 'today', 'month', and 'week'.");
-        //     }
-
-        //     return await _context.Showtimes
-        //                          .Where(st => st.ShowtimeDatetime >= startDate && st.ShowtimeDatetime < endDate)
-        //                          .CountAsync();
-        // }
-
-
 
         return group;
     }
