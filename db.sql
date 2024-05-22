@@ -3,6 +3,7 @@ DROP DATABASE IF EXISTS BookingMovieApp;
 CREATE DATABASE BookingMovieApp;
 GO
 use BookingMovieApp
+
 GO
 CREATE TABLE Users (
     id INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
@@ -160,10 +161,10 @@ VALUES ('Mai', 120, '2023-01-01', 8.5, 18, 'Plot summary for Mai', '/Images/slid
 ('Fast and Furious', 130, '2022-01-01', 8, 16, 'Plot summary for Fast and Furious', '/Images/slider-faf.jpg','/Images/mv-faf.jpg', 'trailer1.mp4',2),
 ('Aquaman', 144, '2023-02-01', 8, 18, 'Plot summary for Aquaman', '/Images/slider-aquaman.jpg','/Images/mv-aquaman.jpg', 'trailer1.mp4',3),
 ('Avatar', 130, '2021-01-01', 9, 16, 'Plot summary for Avatar', '/Images/slider-avatar.jpg','/Images/mv-avatar.jpg', 'trailer1.mp4',3),
-(N'Quỷ Thay Đầu', 130, '2024-04-01', 9, 18, 'Plot summary for Quỷ Thay Đầu', '/Images/mv-bhead.jpg','/Images/mv-bhead.jpg', 'trailer1.mp4',4),
+('Quỷ Thay Đầu', 130, '2024-04-01', 9, 18, 'Plot summary for Quỷ Thay Đầu', '/Images/mv-bhead.jpg','/Images/mv-bhead.jpg', 'trailer1.mp4',4),
 ('Dune - Hành tinh cát', 180, '2024-05-03', 8.5, 18, 'Plot summary for Dune 2', '/Images/slider-dune.jpg','/Images/mv-dune.jpg', 'trailer1.mp4',1),
 ('KungFu Panda 4', 120, '2024-03-08', 6.5, 12, 'Plot summary for KungFuPanda', '/Images/slider-kungfu.jpg','/Images/mv-panda.jpg', 'trailer1.mp4',1),
-(N'Đào Phở và Piano', 120, '2018-12-13', 7.0, 12, 'Plot summary for Đào Phở và Piano', '/Images/slider-dao-pho-piano.jpg','/Images/mv-dao-pho-va-piano.jpg', 'trailer1.mp4',1),
+('Đào Phở và Piano', 120, '2018-12-13', 7.0, 12, 'Plot summary for Đào Phở và Piano', '/Images/slider-dao-pho-piano.jpg','/Images/mv-dao-pho-va-piano.jpg', 'trailer1.mp4',1),
 ('Demon Slayer', 120, '2024-02-23', 8.0, 12, 'Plot summary for Demon Slayer', '/Images/slider-demonslayer.jpg','/Images/mv-demonslayer.jpg', 'trailer1.mp4',2),
 ('Doctor Strange', 120, '2022-02-23', 8.0, 12, 'Plot summary for Doctor Strange', '/Images/slider-drstrange.jpg','/Images/mv-drstrange.jpg', 'trailer1.mp4',3),
 ('Marvel Endgame', 120, '2021-02-09', 8.0, 12, 'Plot summary for Marvel Endgame', '/Images/slider-endgame.jpg','/Images/mv-endgame.jpg', 'trailer1.mp4',1),
@@ -217,17 +218,17 @@ VALUES
 (4, 1, '2024-04-01 15:00:00'),
 (5, 2, '2024-04-01 16:00:00'),
 (6, 3, '2024-04-01 17:00:00'),
-(7, 3, '2024-04-01 17:00:00');
-(25, 3, '2024-03-27 17:00:00');
-(25, 3, '2024-03-28 17:00:00');
-(25, 3, '2024-03-29 17:00:00');
-(25, 3, '2024-03-27 12:00:00');
-(25, 3, '2024-03-28 12:00:00');
-(25, 3, '2024-03-28 13:00:00');
-(25, 3, '2024-03-28 14:00:00');
-(25, 3, '2024-03-28 15:00:00');
-(25, 3, '2024-03-15 15:00:00');
-(25, 3, '2024-03-16 15:00:00');
+(7, 3, '2024-04-01 17:00:00'),
+(25, 3, '2024-03-27 17:00:00'),
+(25, 3, '2024-03-28 17:00:00'),
+(25, 3, '2024-03-29 17:00:00'),
+(25, 3, '2024-03-27 12:00:00'),
+(25, 3, '2024-03-28 12:00:00'),
+(25, 3, '2024-03-28 13:00:00'),
+(25, 3, '2024-03-28 14:00:00'),
+(25, 3, '2024-03-28 15:00:00'),
+(25, 3, '2024-03-15 15:00:00'),
+(25, 3, '2024-03-16 15:00:00'),
 
 
 -- Add dummy for BookingSeats 
