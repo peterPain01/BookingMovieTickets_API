@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieTickets.Api", "MovieTickets.Api\MovieTickets.Api.csproj", "{AF6A8AAB-9311-46EB-8867-9391BB96D77B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{669CEF56-377F-4BDB-B786-185BA3832878}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF6A8AAB-9311-46EB-8867-9391BB96D77B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF6A8AAB-9311-46EB-8867-9391BB96D77B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF6A8AAB-9311-46EB-8867-9391BB96D77B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF6A8AAB-9311-46EB-8867-9391BB96D77B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{669CEF56-377F-4BDB-B786-185BA3832878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{669CEF56-377F-4BDB-B786-185BA3832878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{669CEF56-377F-4BDB-B786-185BA3832878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{669CEF56-377F-4BDB-B786-185BA3832878}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
