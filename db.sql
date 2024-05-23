@@ -13,6 +13,7 @@ CREATE TABLE Users (
     full_name VARCHAR(100),
     birth_date DATE,
 	is_admin int, 
+    joined_at datetime DEFAULT CURRENT_TIMESTAMP , 
     gender VARCHAR(10) CHECK (gender IN ('Male', 'Female', 'Other')),
 );
 
@@ -42,7 +43,7 @@ CREATE TABLE Movies (
     genre_id INT,
     duration_minutes INT,
     release_date DATE,
-    rating DECIMAL(3, 1),
+    rating DECIMAL(3, 1) DEFAULT 0,
 	Certification int, 
     plot_summary TEXT,
     poster_url VARCHAR(255),
