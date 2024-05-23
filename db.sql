@@ -3,8 +3,17 @@ DROP DATABASE IF EXISTS BookingMovieApp;
 CREATE DATABASE BookingMovieApp;
 GO
 use BookingMovieApp
-
 GO
+
+CREATE LOGIN admin123 WITH PASSWORD = '123';
+GO
+
+CREATE USER admin123 FOR LOGIN admin123;
+GO
+
+ALTER ROLE db_owner ADD MEMBER admin123;
+GO
+
 CREATE TABLE Users (
     id INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
     username VARCHAR(50) NOT NULL,
@@ -13,13 +22,13 @@ CREATE TABLE Users (
     full_name VARCHAR(100),
     birth_date DATE,
 	is_admin int, 
-    joined_at datetime DEFAULT CURRENT_TIMESTAMP , 
+    date_joined datetime DEFAULT CURRENT_TIMESTAMP , 
     gender VARCHAR(10) CHECK (gender IN ('Male', 'Female', 'Other')),
 );
 
-INSERT INTO User(username,password, is_admin)
-VALUES(un1, 'A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3', 0),
-VALUES(ad1, 'A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3', 1);
+INSERT INTO Users(username, password, is_admin)
+VALUES('un1', 'A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3', 0),
+		('ad1', 'A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3', 1);
 
 
 CREATE TABLE Genres (
@@ -47,7 +56,7 @@ CREATE TABLE Movies (
 	Certification int, 
     plot_summary TEXT,
     poster_url VARCHAR(255),
-         VARCHAR(255),
+    poster_vertical_url  VARCHAR(255),
     trailer_url VARCHAR(255), 
 	FOREIGN KEY (genre_id) REFERENCES Genres(genre_id)
 );
@@ -229,7 +238,7 @@ VALUES
 (25, 3, '2024-03-28 14:00:00'),
 (25, 3, '2024-03-28 15:00:00'),
 (25, 3, '2024-03-15 15:00:00'),
-(25, 3, '2024-03-16 15:00:00'),
+(25, 3, '2024-03-16 15:00:00');
 
 
 -- Add dummy for BookingSeats 
